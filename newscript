@@ -1,0 +1,11 @@
+#! /bin/sh
+
+if [ "$1" -a ! -e $1 ]
+then
+	echo creating script $1
+	echo "#! /bin/sh"> $1
+	chmod +x $1
+	mvim $1
+else
+	echo $1 exists?  aborting
+fi

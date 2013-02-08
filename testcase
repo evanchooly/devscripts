@@ -1,0 +1,39 @@
+#! /bin/sh
+
+if [ "$1" ] 
+then
+	FILE=$1
+	shift
+else
+	FILE=Test.java
+fi
+
+if [ "${FILE%.java}" = "${FILE}" ]
+then
+	FILE=${FILE}.java
+fi
+CLASS=${FILE%%.java}
+
+if [ ! -e /tmp/${FILE} ]
+then
+	cat > /tmp/${FILE} <<EOF
+import java.io.*;
+import java.util.*;
+public class ${CLASS} {
+	public static void sout(Object o) {
+		System.out.println(o);
+	}
+
+	public static void main(String[] args) throws Exception {
+	}
+}
+EOF
+	mvim /tmp/${FILE}
+
+	cd /tmp
+
+	echo press enter to run ${CLASS}
+	read
+fi
+
+javac ${FILE} && java -cp . ${CLASS} $*

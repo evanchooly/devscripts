@@ -1,0 +1,22 @@
+#! /bin/sh
+
+function updateProfile() {
+	sed  -i "" \
+		-e "s|^export GF_INSTALL=.*|export GF_INSTALL=/Users/jlee/oracle/dev/gf-builds/${1}|" \
+		-e "s|^export GF_DEV_HOME=.*|export GF_DEV_HOME=${2}|" \
+		~/.profile
+}
+
+echo "Choose Glassfish dev environment:"
+echo  '[1]' Glassfish trunk 
+echo  '[2]' Glassfish 3.1 Branch 
+echo  '[3]' Glassfish Websockets
+read ans
+case "$ans" in
+	1) updateProfile trunk ${DEV}/glassfish/main/appserver
+		;;
+	2) updateProfile glassfish-3.1.x ${DEV}/gf-3.1.x
+		;;
+	3) updateProfile glassfish-websockets /Users/jlee/personal/dev/glassfish-websockets/appserver
+		;;
+esac

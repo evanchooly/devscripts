@@ -1,0 +1,11 @@
+SHOW_DOT_FILES="defaults write com.apple.Finder AppleShowAllFiles YES"
+HIDE_DOTFILES="defaults write com.apple.Finder AppleShowAllFiles NO"
+echo "Choose finder mode:"
+echo  $SHOW_DOT_FILES '[1] ' ;
+echo  $HIDE_DOTFILES '[2] ' ;
+read ans
+case "$ans" in
+	1) `$SHOW_DOT_FILES`;;
+	2) `$HIDE_DOTFILES`;;
+esac
+killall Finder
